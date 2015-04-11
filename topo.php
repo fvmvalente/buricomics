@@ -27,10 +27,10 @@
         <nav class="menu">
             <ul>
                 <li class="menu-item">
-                    <a class="menu-link menu-selecionado" href="index.html">Home</a>
+                    <a class="menu-link menu-selecionado" href="index.php">Home</a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="sobre.html">Sobre</a>
+                    <a class="menu-link" href="sobre.php">Sobre</a>
                 </li>
                 <li class="menu-item">
                     <a class="menu-link" href="">Comic Books</a>
@@ -39,39 +39,9 @@
                     <a class="menu-link" href="">Blog</a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="contato.html">Contato</a>
+                    <a class="menu-link" href="contato.php">Contato</a>
                 </li>
             </ul>
         </nav>
     </div>
 </header><!-- fim do topo -->
-
-<section class="conteudo">
-    <div class="banner-index">
-        <img alt="" src="assets/img/avengers-age-of-ultron-1280.jpg" />
-
-        <div class="centralizar">
-            <div class="banner-index-sobre">
-                <h1>Lorem ipsum dolor sit amet</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis maiores dicta voluptatem, nulla error temporibus eaque quasi enim iure debitis.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="centralizar">
-
-        <form class="busca">
-            <label for="buscaInput">Procurar Comic Book</label>
-            <input placeholder="Procurar Comic Book" id="buscaInput" type="search" />
-            <button>L</button>
-        </form>
-
-    </div><!-- fim da centralizar -->
-</section><!-- fim do conteudo -->
-
-<footer class="rodape">
-    Buricomics &copy; 2014
-</footer><!-- fim do rodape -->
-
-</body>
-</html>
