@@ -4,6 +4,25 @@
 	<div class="centralizar clearfix">
 		<article class="texto">
 			<h1 class="titulo">Contato</h1>
+			
+			<?php 
+			if(isset($_SESSION["sucesso"])){//Se existe variavel de feedback na URL
+                if($_SESSION["sucesso"] === true){ ?>
+                    <p style="color: green;">MENSAGEM ENVIADA COM SUCESSO!</p>
+                <?php 
+                } else { //Se ocorreu erro
+                    //Pega os dados digitados da seção
+                    $contato = $_SESSION["contato"];
+                ?>
+                    <p style="color: red;">
+                        <strong>OCORREU UM ERRO:</strong><br/>
+                        <em><?php echo $_SESSION["erro"]; ?></em>
+                        <br/>TENTE NOVAMENTE!
+                    </p>
+                <?php }//fim if true
+                session_destroy();
+			}//fim-if isset
+			?>
 
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur
 				quaerat repudiandae ratione laudantium libero, animi enim dolor ut
@@ -19,23 +38,25 @@
 
 						<div>
 							<label for="conNome">Nome:</label> <input class="controle"
-								id="conNome" name="conNome" type="text" required />
+								id="conNome" name="conNome" type="text" required value="<?php echo $contato["conNome"]; ?>"/>
 						</div>
 
 						<div class="coluna w30 pr">
 							<label for="conIdade">Idade:</label> <input class="controle"
-								id="conIdade" name="conIdade" type="text" required />
+								id="conIdade" name="conIdade" type="text" required value="<?php echo $contato["conIdade"]; ?>"/>
 						</div>
 
 						<div class="coluna w70 pl">
 							<label for="">Sexo:</label> <br />
 							<div class="coluna metade">
 								<input id="conMasculino" name="conSexo" type="radio"
+								    <?php if($contato["conSexo"] == "Masculino"){ echo "checked"; } ?>
 									value="Masculino" required /> <label for="conMasculino">Masculino</label>
 							</div>
 
 							<div class="coluna metade">
 								<input id="conFeminino" name="conSexo" type="radio"
+								    <?php if($contato["conSexo"] == "Feminino"){ echo "checked"; } ?>    
 									value="Feminino" required /> <label for="conFeminino">Feminino</label>
 							</div>
 						</div>
@@ -76,12 +97,12 @@
 
 						<div>
 							<label for="conEmail">E-mail:</label> <input class="controle"
-								id="conEmail" name="conEmail" type="email" required />
+								id="conEmail" name="conEmail" type="email" required value="<?php echo $contato["conEmail"]; ?>"/>
 						</div>
 
 						<div class="coluna metade pr">
 							<label for="conCidade">Cidade:</label> <input class="controle"
-								id="conCidade" name="conCidade" type="text" required />
+								id="conCidade" name="conCidade" type="text" required value="<?php echo $contato["conCidade"]; ?>"/>
 						</div>
                         <?php
                         $estados = array(
@@ -129,7 +150,7 @@
 						<div class="coluna metade pr">
 							<label for="conTelefone">Telefone:</label> <input
 								class="controle" id="conTelefone" name="conTelefone" type="text"
-								required />
+								required value="<?php echo $contato["conTelefone"]; ?>"/>
 						</div>
 
 					</fieldset>
@@ -142,7 +163,7 @@
 				<div>
 					<label for="conMensagem">Mensagem:</label>
 					<textarea class="controle" id="conMensagem" name="conMensagem"
-						required></textarea>
+						required><?php echo $contato["conMensagem"]; ?></textarea>
 				</div>
 			</fieldset>
 

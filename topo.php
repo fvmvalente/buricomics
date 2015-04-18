@@ -1,4 +1,9 @@
-<?php include 'util/funcoes.php'; ?>
+<?php 
+ini_set("display_errors",true);
+error_reporting(E_ERROR | E_WARNING);
+include 'util/funcoes.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
