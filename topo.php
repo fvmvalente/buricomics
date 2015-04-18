@@ -1,3 +1,4 @@
+<?php include 'util/funcoes.php'; ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -27,10 +28,10 @@
         <nav class="menu">
             <ul>
                 <li class="menu-item">
-                    <a class="menu-link menu-selecionado" href="index.php">Home</a>
+                    <a class="menu-link <?php if(verificaSelecionado("index.php")){ echo "menu-selecionado"; }?>" href="index.php">Home</a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="sobre.php">Sobre</a>
+                    <a class="menu-link  <?php if(verificaSelecionado("sobre.php")){ echo "menu-selecionado"; }?>" href="sobre.php">Sobre</a>
                 </li>
                 <li class="menu-item">
                     <a class="menu-link" href="">Comic Books</a>
@@ -39,7 +40,7 @@
                     <a class="menu-link" href="">Blog</a>
                 </li>
                 <li class="menu-item">
-                    <a class="menu-link" href="contato.php">Contato</a>
+                    <a class="menu-link <?php if(verificaSelecionado("contato.php")){ echo "menu-selecionado"; }?>" href="contato.php">Contato</a>
                 </li>
             </ul>
         </nav>
