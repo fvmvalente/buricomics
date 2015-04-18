@@ -51,3 +51,9 @@ session_start();
         </nav>
     </div>
 </header><!-- fim do topo -->
+<?php 
+
+setcookie("NomeVisitante", "Eder Franco", time()+3600);
+//var_dump($_COOKIE["NomeVisitante"]);
+
+?>

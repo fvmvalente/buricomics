@@ -50,14 +50,14 @@
 							<label for="">Sexo:</label> <br />
 							<div class="coluna metade">
 								<input id="conMasculino" name="conSexo" type="radio"
-								    <?php if($contato["conSexo"] == "Masculino"){ echo "checked"; } ?>
-									value="Masculino" required /> <label for="conMasculino">Masculino</label>
+								    <?php if($contato["conSexo"] == "1"){ echo "checked"; } ?>
+									value="1" required /> <label for="conMasculino">Masculino</label>
 							</div>
 
 							<div class="coluna metade">
 								<input id="conFeminino" name="conSexo" type="radio"
-								    <?php if($contato["conSexo"] == "Feminino"){ echo "checked"; } ?>    
-									value="Feminino" required /> <label for="conFeminino">Feminino</label>
+								    <?php if($contato["conSexo"] == "2"){ echo "checked"; } ?>    
+									value="2" required /> <label for="conFeminino">Feminino</label>
 							</div>
 						</div>
 
