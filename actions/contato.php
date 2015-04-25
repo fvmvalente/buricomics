@@ -6,63 +6,57 @@ include '../util/funcoes.php';
 session_start();
 date_default_timezone_set("America/Manaus");
 
+
 $_SESSION["contato"] = $_POST;
 
-// 1.Prepara a mensagem
-$mensagem = "<strong>Nome:</strong> " . $_POST["conNome"];
-$mensagem .= "<br/><strong>E-mail:</strong> " . $_POST["conEmail"];
-$mensagem .= "<br/><strong>Idade:</strong> " . $_POST["conIdade"];
-$mensagem .= "<br/><strong>Sexo:</strong> " . $_POST["conSexo"];
-$mensagem .= "<br/><strong>Cidade:</strong> " . $_POST["conCidade"];
-$mensagem .= "<br/><strong>Estado:</strong> " . $_POST["conEstado"];
-$mensagem .= "<br/><strong>Telefone:</strong> " . $_POST["conTelefone"];
-$mensagem .= "<br/><strong>Mensagem:</strong> " . $_POST["conMensagem"];
+//Validar data
+if(!validaData($_POST["conIdade"])){
+    $_SESSION["erro"] = "Formato da data de nascimento está inválido.";
+    $_SESSION["sucesso"] = false;
+    header("location: ../contato.php");
+    exit;
+}
 
-// Envia o e-mail
-$destinatario = "efranco23@gmail.com";
-$remetente = trim($_POST["conEmail"]);
-//$remetente = array("eder@tambacode.com.br","contato@buritech.com.br");
-$nome = trim($_POST["conNome"]);
-$assunto = "Contato enviado pelo site BURICOMICS";
-$copia = "eder@tambacode.com.br"; // O e-mail de quem vai receber cópia
-                                  
-// Tenta enviar o e-mail
-$enviou = enviarEmail($destinatario, $remetente, $nome, $copia, $mensagem, $assunto);
-$enviou = true;
-if ($enviou === true) {
-    // 
-    $_SESSION["sucesso"] = true;
-    
-    // Salva os dados no banco de dados
-    // $db = mysql_connect("localhost","root","");
-    // mysql_select_db("buriphp");
+//Fazendo upload do arquivo
+$retornoArquivo = enviaArquivo($_FILES["arquivoAnexo"]);
+$nomeArquivo = "";
+if(!$retornoArquivo["erro"]){
+    $nomeArquivo = $retornoArquivo["nomeArquivo"];
+}
+
+//Formatando a data de nascimento para salvar no banco
+$nascimento = formataDataBanco($_POST["conIdade"]);
+
+if (enviaContato($_POST)) {
     
     $melhorHorario = implode(",",$_POST["conHorario"]);
     
-    $query = "INSERT INTO contato(nome,email,nascimento,sexo,cidade,estado,telefone,melhorHorario,mensagem,dataCadastro)";
+    $query = "INSERT INTO contato(nome,email,nascimento,sexo,cidade,estado,telefone,melhorHorario,mensagem,dataCadastro,arquivoAnexo)";
     $query .= " VALUES (";
     $query .= "'" . trim($_POST["conNome"]) . "',";
     $query .= "'" . trim(strtolower($_POST["conEmail"])) . "',";
-    $query .= "'" . date("Y-m-d") . "',";
+    $query .= "'" . $nascimento. "',";
     $query .= "'" . $_POST["conSexo"] . "',";
     $query .= "'" . trim($_POST["conCidade"]) . "',";
     $query .= "'" . $_POST["conEstado"] . "',";
     $query .= "'" . $_POST["conTelefone"] . "',";
     $query .= "'" . $melhorHorario . "',";
     $query .= "'" . $_POST["conMensagem"] . "',";
-    $query .= "'" . date("Y-m-d H:i:s") . "');";
-    
+    $query .= "'" . date("Y-m-d H:i:s") . "',";
+    $query .= "'" . $nomeArquivo . "');";
     
     $db = new mysqli("localhost", "root", "", "buriphp");
     $retorno = $db->query($query);
-    if($retorno === false){
-        //echo "Deu zica!";
-        //var_dump($db->error);
+    $idContato = $db->insert_id;
+    
+    if($retorno !== false){
+        $_SESSION["idContato"] = $idContato;
+        header("location: ../sucesso.php");
     } else {
-        //echo "Funfou!";
+        $_SESSION["erro"] = false;
+        $_SESSION["sucesso"] = true;
         header("location: ../contato.php");
     }
-    exit;
     
 } else {
     $_SESSION["erro"] = $enviou;

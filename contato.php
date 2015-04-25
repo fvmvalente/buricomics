@@ -30,7 +30,7 @@
 				accusamus provident!</p>
 		</article>
 
-		<form action="actions/contato.php" method="post">
+		<form action="actions/contato.php" method="post" enctype="multipart/form-data">
 			<div class="clearfix">
 				<div class="coluna metade pr">
 					<fieldset class="fieldset">
@@ -40,9 +40,14 @@
 							<label for="conNome">Nome:</label> <input class="controle"
 								id="conNome" name="conNome" type="text" required value="<?php echo $contato["conNome"]; ?>"/>
 						</div>
+						
+						<div>
+							<label for="arquivoAnexo">Anexo:</label> <input class="controle"
+								id="arquivoAnexo" name="arquivoAnexo" type="file" required value="<?php echo $contato["arquivoAnexo"]; ?>"/>
+						</div>
 
 						<div class="coluna w30 pr">
-							<label for="conIdade">Idade:</label> <input class="controle"
+							<label for="conIdade">Nascimento:</label> <input class="controle"
 								id="conIdade" name="conIdade" type="text" required value="<?php echo $contato["conIdade"]; ?>"/>
 						</div>
 
