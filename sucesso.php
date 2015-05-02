@@ -5,7 +5,17 @@ $idContato = $_SESSION["idContato"];
 
 $query = "SELECT * FROM contato WHERE id = ".$idContato;
 $retorno = $db->query($query);
-var_dump($query);
+var_dump($retorno);
+
+// while ($row = mysqli_fetch_assoc($retorno))
+// {
+//     var_dump($row);
+// }
+
+while ($row = $retorno->fetch_assoc()) {
+	var_dump($row);
+}
+
 // var_dump($retorno);
 ?>
 

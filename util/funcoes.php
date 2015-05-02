@@ -9,13 +9,15 @@ function verificaSelecionado($nomePagina){
 
 function enviarEmail($destinatario,$remetente,$nome,$copia,$mensagem,$assunto){
     
+    $config = parse_ini_file("../config/config.ini",true);
+    
     $mail = new PHPMailer();
     $mail->IsSMTP(); // Define que a mensagem será SMTP
-    $mail->Host = 'mail.khi.by'; // Endereço do servidor SMTP
+    $mail->Host = $config["EMAIL_TESTE"]["host"]; // Endereço do servidor SMTP
     $mail->SMTPAuth = true; // Usa autenticaçao SMTP? (opcional)
-    $mail->Username = 'alunos@khi.by'; // Usuário do servidor SMTP
-    $mail->Password = 'alunos@php1'; // Senha do servidor SMTP
-    $mail->Port = 26;
+    $mail->Username = $config["EMAIL_TESTE"]["username"]; // Usuário do servidor SMTP
+    $mail->Password = $config["EMAIL_TESTE"]["password"]; // Senha do servidor SMTP
+    $mail->Port = $config["EMAIL_TESTE"]["port"];
     $mail->Subject = $assunto; // Assunto
     $mail->MsgHTML($mensagem); // Conteúdo
     $mail->From = $remetente; // E-mail de quem envia
