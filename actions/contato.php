@@ -27,7 +27,7 @@ if(!$retornoArquivo["erro"]){
 //Formatando a data de nascimento para salvar no banco
 $nascimento = formataDataBanco($_POST["conIdade"]);
 
-if (enviaContato($_POST)) {
+if (enviaContato($_POST,$nomeArquivo)) {
     
     $melhorHorario = implode(",",$_POST["conHorario"]);
     

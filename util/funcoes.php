@@ -7,7 +7,7 @@ function verificaSelecionado($nomePagina){
 	return ($posicao !== false);
 }
 
-function enviarEmail($destinatario,$remetente,$nome,$copia,$mensagem,$assunto){
+function enviarEmail($destinatario,$remetente,$nome,$copia,$mensagem,$assunto,$anexo = ""){
 	$config = parse_ini_file("../config/config.ini",true);
 	
 	
@@ -112,7 +112,7 @@ function formataDataBanco($data){
 	return date("Y-m-d H:i:s",strtotime($date));
 }
 
-function enviaContato($contato){
+function enviaContato($contato,$nomeArquivo){
     // 1.Prepara a mensagem
     $mensagem = "<strong>Nome:</strong> " . $contato["conNome"];
     $mensagem .= "<br/><strong>E-mail:</strong> " . $contato["conEmail"];
@@ -132,5 +132,5 @@ function enviaContato($contato){
     $copia = "eder@tambacode.com.br"; // O e-mail de quem vai receber cópia
     
     // Tenta enviar o e-mail
-    return enviarEmail($destinatario, $remetente, $nome, $copia, $mensagem, $assunto);
+    return enviarEmail($destinatario, $remetente, $nome, $copia, $mensagem, $assunto, $nomeArquivo);
 }
