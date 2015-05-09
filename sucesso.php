@@ -4,19 +4,16 @@ include 'topo.php';
 $idContato = $_SESSION["idContato"];
 
 $query = "SELECT * FROM contato WHERE id = ".$idContato;
-$retorno = $db->query($query);
+$retorno = $db -> query($query);
+//var_dump($retorno);
+
 var_dump($retorno);
+exit;
 
-// while ($row = mysqli_fetch_assoc($retorno))
-// {
-//     var_dump($row);
-// }
-
-while ($row = $retorno->fetch_assoc()) {
-	var_dump($row);
+while ($linha = $retorno -> fetch_assoc()) {
+	var_dump($linha);
 }
 
-// var_dump($retorno);
 ?>
 
 <section class="conteudo">

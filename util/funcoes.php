@@ -8,20 +8,20 @@ function verificaSelecionado($nomePagina){
 }
 
 function enviarEmail($destinatario,$remetente,$nome,$copia,$mensagem,$assunto){
-    
-    $config = parse_ini_file("../config/config.ini",true);
-    
-    $mail = new PHPMailer();
-    $mail->IsSMTP(); // Define que a mensagem será SMTP
-    $mail->Host = $config["EMAIL_TESTE"]["host"]; // Endereço do servidor SMTP
-    $mail->SMTPAuth = true; // Usa autenticaçao SMTP? (opcional)
-    $mail->Username = $config["EMAIL_TESTE"]["username"]; // Usuário do servidor SMTP
-    $mail->Password = $config["EMAIL_TESTE"]["password"]; // Senha do servidor SMTP
-    $mail->Port = $config["EMAIL_TESTE"]["port"];
-    $mail->Subject = $assunto; // Assunto
-    $mail->MsgHTML($mensagem); // Conteúdo
-    $mail->From = $remetente; // E-mail de quem envia
-    $mail->FromName = $nome; // Nome de quem envia
+	$config = parse_ini_file("../config/config.ini",true);
+	
+	
+	$mail = new PHPMailer();
+	$mail->IsSMTP(); // Define que a mensagem será SMTP
+	$mail->Host = $config["EMAIL"]["host"]; // Endereço do servidor SMTP
+	$mail->SMTPAuth = true; // Usa autenticaçao SMTP? (opcional)
+	$mail->Username = $config["EMAIL"]["username"]; // Usuário do servidor SMTP
+	$mail->Password = $config["EMAIL"]["password"]; // Senha do servidor SMTP
+	$mail->Port = $config["EMAIL"]["port"];
+	$mail->Subject = $assunto; // Assunto
+	$mail->MsgHTML($mensagem); // Conteúdo
+	$mail->From = $remetente; // E-mail de quem envia
+	$mail->FromName = $nome; // Nome de quem envia
     
     if(is_array($destinatario)){//Se veio um array, insere cada email
         foreach($destinatario as $dest){
